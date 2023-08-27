@@ -1,4 +1,4 @@
-MouseTo	KEYWORD1
+ESP32MouseTo	KEYWORD1
 setTarget	KEYWORD2
 getTargetX	KEYWORD2
 getTargetY	KEYWORD2

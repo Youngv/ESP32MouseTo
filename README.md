@@ -1,4 +1,4 @@
-# MouseTo
+# ESP32MouseTo
 
 Library for [Arduino](https://arduino.cc) Leonardo/Micro/Pro Micro for moving the mouse pointer to absolute screen coordinates.
 
@@ -8,7 +8,7 @@ Library for [Arduino](https://arduino.cc) Leonardo/Micro/Pro Micro for moving th
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [`MouseTo.move()` Process](#mousetomove-process)
+- [`ESP32MouseTo.move()` Process](#mousetomove-process)
 - [Mouse coordinate display software](#mouse-coordinate-display-software)
 - [Alternatives](#alternatives)
 - [Contributing](#contributing)
@@ -17,24 +17,24 @@ Library for [Arduino](https://arduino.cc) Leonardo/Micro/Pro Micro for moving th
 
 #### Installation
 
-- Download the most recent version of MouseTo here: https://github.com/per1234/MouseTo/archive/master.zip
+- Download the most recent version of ESP32MouseTo here: https://github.com/Youngv/ESP32MouseTo/archive/master.zip
 - Using Arduino IDE 1.0.x:
   - **Sketch > Import Library... > Add Library... >** select the downloaded file **> Open**
 - Using Arduino IDE 1.5+:
   - **Sketch > Include Library > Add ZIP Library... >** select the downloaded file **> Open**
 - Running the example sketches:
-  - **File > Examples > MouseTo**
+  - **File > Examples > ESP32MouseTo**
   - Upload to device
 
 #### Usage
 
-See the example sketches at **File > Examples > MouseTo** for demonstration of library usage.
+See the example sketches at **File > Examples > ESP32MouseTo** for demonstration of library usage.
 
-##### `#include <MouseTo.h>`
+##### `#include <ESP32MouseTo.h>`
 
-Allow access to the functions of the MouseTo library.
+Allow access to the functions of the ESP32MouseTo library.
 
-##### `MouseTo.setTarget(targetX, targetY[, homeFirst])`
+##### `ESP32MouseTo.setTarget(targetX, targetY[, homeFirst])`
 
 Move mouse pointer to absolute screen coordinates. Note that screen coordinates start from the upper left corner.
 
@@ -42,34 +42,34 @@ Move mouse pointer to absolute screen coordinates. Note that screen coordinates 
   - Type: int
 - Parameter: **targetY** - Y screen coordinate to move to.
   - Type: int
-- Parameter(optional): **homeFirst** - Whether to home the mouse pointer before moving to the target. At a minimum the pointer must be homed before the first use of MouseTo in your code. If homing is not done after that time the accuracy of the mouse pointer movements might suffer, for example if the regular mouse connected to the computer is moved. The default value is `true`.
+- Parameter(optional): **homeFirst** - Whether to home the mouse pointer before moving to the target. At a minimum the pointer must be homed before the first use of ESP32MouseTo in your code. If homing is not done after that time the accuracy of the mouse pointer movements might suffer, for example if the regular mouse connected to the computer is moved. The default value is `true`.
   - Type: boolean
 - Returns: none
 
-##### `MouseTo.getTargetX()`
+##### `ESP32MouseTo.getTargetX()`
 
-Get the last X coordinate set by `MouseTo.setTarget()`.
+Get the last X coordinate set by `ESP32MouseTo.setTarget()`.
 
 - Returns: Target X coordinate.
   - Type: int
 
-##### `MouseTo.getTargetY()`
+##### `ESP32MouseTo.getTargetY()`
 
-Get the last Y coordinate set by `MouseTo.setTarget()`.
+Get the last Y coordinate set by `ESP32MouseTo.setTarget()`.
 
 - Returns: Target Y coordinate.
   - Type: int
 
-##### `MouseTo.move()`
+##### `ESP32MouseTo.move()`
 
-Move mouse pointer to the target coordinates. Multiple calls to `MouseTo.move()` may be required before the target coordinates are reached.
+Move mouse pointer to the target coordinates. Multiple calls to `ESP32MouseTo.move()` may be required before the target coordinates are reached.
 
 - Returns: `true` = target coordinates reached, `false` = target coordinates not yet reached
   - Type: boolean
 
-##### `MouseTo.setScreenResolution(x, y)`
+##### `ESP32MouseTo.setScreenResolution(x, y)`
 
-When `MouseTo.move()` homes it assumes that the mouse pointer is at the lower right corner. The default values are set to home correctly even with very high resolution(4K UHD). By setting the MouseTo screen resolution value to your actual resolution you can reduce the time `MouseTo.move()` takes to reach the target coordinates.
+When `ESP32MouseTo.move()` homes it assumes that the mouse pointer is at the lower right corner. The default values are set to home correctly even with very high resolution(4K UHD). By setting the ESP32MouseTo screen resolution value to your actual resolution you can reduce the time `ESP32MouseTo.move()` takes to reach the target coordinates.
 
 - Parameter: **x** - X screen resolution. The default value is 3840.
   - Type: int
@@ -77,51 +77,51 @@ When `MouseTo.move()` homes it assumes that the mouse pointer is at the lower ri
   - Type: int
 - Returns: none
 
-##### `MouseTo.getScreenResolutionX()`
+##### `ESP32MouseTo.getScreenResolutionX()`
 
 - Returns: X screen resolution.
   - Type: int
 
-##### `MouseTo.getScreenResolutionY()`
+##### `ESP32MouseTo.getScreenResolutionY()`
 
 - Returns: Y screen resolution.
   - Type: int
 
-##### `MouseTo.setCorrectionFactor(correctionFactorInput)`
+##### `ESP32MouseTo.setCorrectionFactor(correctionFactorInput)`
 
-The screen distance moved is different from the distance arguments passed to `Mouse.move()`. In order for `MouseTo.move()` coordinates to correspond with the screen coordinates you must set a correction factor. The correct value can be determined with **File > Examples > MouseTo > BasicUsage**.
+The screen distance moved is different from the distance arguments passed to `Mouse.move()`. In order for `ESP32MouseTo.move()` coordinates to correspond with the screen coordinates you must set a correction factor. The correct value can be determined with **File > Examples > ESP32MouseTo > BasicUsage**.
 
 - Parameter: **correctionFactorInput** - The default value is 1(no correction).
   - Type: float
 - Returns: none
 
-##### `MouseTo.getCorrectionFactor()`
+##### `ESP32MouseTo.getCorrectionFactor()`
 
 - Returns: Correction factor.
   - Type: float
 
-##### `MouseTo.setMaxJump(maxJumpDistanceInput)`
+##### `ESP32MouseTo.setMaxJump(maxJumpDistanceInput)`
 
-`Mouse.move()` only allows a maximum move of 127 pixels in each axis so longer mouse pointer movements require multiple calls. Smaller values will require more calls to `MouseTo.move()` before the target coordinates are reached, larger values may lead to less accuracy. You must recalculate the correction factor whenever this is changed.
+`Mouse.move()` only allows a maximum move of 127 pixels in each axis so longer mouse pointer movements require multiple calls. Smaller values will require more calls to `ESP32MouseTo.move()` before the target coordinates are reached, larger values may lead to less accuracy. You must recalculate the correction factor whenever this is changed.
 
-- Parameter: **maxJumpDistanceInput** - The maximum distance(x and y) the mouse pointer can move on each call to `MouseTo.move()`. Allowable values are 1-127. The default value is 10.
+- Parameter: **maxJumpDistanceInput** - The maximum distance(x and y) the mouse pointer can move on each call to `ESP32MouseTo.move()`. Allowable values are 1-127. The default value is 10.
   - Type: int8_t
 - Returns: none
 
-##### `MouseTo.getMaxJump()`
+##### `ESP32MouseTo.getMaxJump()`
 
 - Returns: Maximum jump distance.
   - Type: int8_t
 
-##### `MouseTo.home()`
+##### `ESP32MouseTo.home()`
 
-Re-home the mouse before continuing to the target coordinates. This is useful for cases when `MouseTo.move()` completion was delayed long enough that the mouse pointer may have been moved.
+Re-home the mouse before continuing to the target coordinates. This is useful for cases when `ESP32MouseTo.move()` completion was delayed long enough that the mouse pointer may have been moved.
 
 - Returns: none
 
-#### `MouseTo.move()` Process
+#### `ESP32MouseTo.move()` Process
 
-- Each call of `MouseTo.move()` moves the pointer up to the maximum jump distance(set by `MouseTo.setMaxJump()`) in the x and y axes.
+- Each call of `ESP32MouseTo.move()` moves the pointer up to the maximum jump distance(set by `ESP32MouseTo.setMaxJump()`) in the x and y axes.
 - Home mouse pointer to (0, 0).
 - Once the mouse pointer is homed start moving to the target coordinates.
 - Once the target coordinates are reached return `true`.
@@ -147,4 +147,4 @@ For calibration and usage, it is helpful to have a program that displays the cur
 
 #### Contributing
 
-Pull requests or issue reports are welcome! Please see the [contribution rules](https://github.com/per1234/MouseTo/blob/master/.github/CONTRIBUTING.md) for instructions.
+Pull requests or issue reports are welcome! Please see the [contribution rules](https://github.com/Youngv/ESP32MouseTo/blob/master/.github/CONTRIBUTING.md) for instructions.

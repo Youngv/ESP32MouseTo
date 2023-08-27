@@ -1,31 +1,47 @@
-// Demonstrates the effect of different MouseTo.setMaxJump() settings.
+// Demonstrates the effect of different ESP32MouseTo.setMaxJump() settings.
 
-#if ARDUINO > 10605
-#include <Mouse.h>
-#endif  //ARDUINO > 10605
-#include <MouseTo.h>
+#if ARDUINO_USB_MODE
+#warning This sketch should be used when USB is in OTG mode
+void setup(){}
+void loop(){}
+#else
 
-const byte pin = 10;
+#include "USB.h"
+#include "Esp32MouseTo.h"
+USBHIDMouse Mouse;
+
+#if ARDUINO_USB_CDC_ON_BOOT
+#define HWSerial Serial0
+#define USBSerial Serial
+#else
+#define HWSerial Serial
+USBCDC USBSerial;
+#endif
+
+const int rightButton = 15;
 byte maxJump;
 
 void setup() {
+  USBSerial.begin(9600);
   Mouse.begin();
-  Serial.begin(9600);
-  pinMode(pin, INPUT_PULLUP);
-  MouseTo.setTarget(400, 400);
+  USB.begin();
+  pinMode(rightButton, INPUT_PULLUP);
+  ESP32MouseTo.setTarget(400, 400);
 }
 
 void loop() {
-  while (digitalRead(pin) == LOW) {
+  while (digitalRead(rightButton) == LOW) {
     maxJump++;
     if (maxJump == 128) {
       maxJump = 1;
     }
-    Serial.print(F("maxJump="));
-    Serial.println(maxJump);
-    MouseTo.setMaxJump(maxJump);
-    while (MouseTo.move() == false) {}
+    USBSerial.print(F("maxJump="));
+    USBSerial.println(maxJump);
+    ESP32MouseTo.setMaxJump(maxJump);
+    while (ESP32MouseTo.move() == false) {}
     delay(3000);
-    MouseTo.home();
+    ESP32MouseTo.home();
   }
 }
+
+#endif /* ARDUINO_USB_MODE */

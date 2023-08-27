@@ -1,15 +1,13 @@
-// MouseTo - Library for Arduino Leonardo/Micro for moving the mouse pointer to absolute screen coordinates: http://github.com/per1234/MouseTo
-#ifndef MouseTo_h
-#define MouseTo_h
+// ESP32MouseTo - Library for Arduino Leonardo/Micro for moving the mouse pointer to absolute screen coordinates: https://github.com/Youngv/ESP32MouseTo
+#ifndef ESP32MouseTo_h
+#define ESP32MouseTo_h
 
 #include <Arduino.h>
-#if ARDUINO > 10605
-#include <Mouse.h>
-#endif  //ARDUINO > 10605
+#include <USBHIDMouse.h>
 
-class MouseToClass {
+class ESP32MouseToClass {
   public:
-    MouseToClass();
+    ESP32MouseToClass();
     void setTarget(const int targetXinput, const int targetYinput, const boolean homeFirst = true);
     int getTargetX();
     int getTargetY();
@@ -35,5 +33,5 @@ class MouseToClass {
     int8_t jumpDistance;
     boolean moveAxisX;
 };
-extern MouseToClass MouseTo;  //declare the class so it doesn't have to be done in the sketch
-#endif  //MouseTo_h
+extern ESP32MouseToClass ESP32MouseTo;  //declare the class so it doesn't have to be done in the sketch
+#endif  //ESP32MouseTo_h
