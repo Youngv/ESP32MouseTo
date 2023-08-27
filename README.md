@@ -1,6 +1,6 @@
 # ESP32MouseTo
 
-Library for [Arduino](https://arduino.cc) Leonardo/Micro/Pro Micro for moving the mouse pointer to absolute screen coordinates.
+Library for [Arduino](https://arduino.cc) ESP32 S3 for moving the mouse pointer to absolute screen coordinates.
 
 ## Table of contents
 
